@@ -61,11 +61,14 @@
 .box-info {
     height: 30%;
     line-height: 30px;
-    padding-left: 40px;
-    padding-top: 40px;
-    padding-right: 40px;
     display: flex;
     justify-content: space-between;
+}
+
+.box-text {
+    padding-top: 30px;
+    padding-left: 40px;
+
 }
 
 .vertical-line {
@@ -73,6 +76,7 @@
     height: 150%;
     border: 1px inset;
     margin-left: 60px;
+    margin-top: 40px;
 }
 
 .title {
