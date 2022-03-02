@@ -1,0 +1,87 @@
+* {
+    margin: 0;
+    padding: 0;
+    font-family: 'Rubik', sans-serif;
+}
+
+.bg-image {
+    padding: 100px 0;
+    text-align: center;
+    background-image: url('images/pattern-bg.png');
+    background-size: 100%;
+    height: 200px;
+}
+
+.header {
+    padding-top: 10px;
+    font-size: 3rem;
+    color: white;
+}
+
+.form-field {
+    margin-top: 30px;
+}
+
+.input-field {
+    width: 35%;
+    height: 60px;
+    padding-left: 20px;
+    border-top-left-radius: 15px;
+    border-bottom-left-radius: 15px;
+}
+
+.search {
+    position: relative;
+    height: 63px;
+    width: 3%;
+    right: 5.5px;
+    top: 1px;
+    background: black;
+    border-top-right-radius: 15px;
+    border-bottom-right-radius: 15px;
+}
+
+.ip-field {
+    height: 170px;
+    width: 70%;
+    margin: 0 auto;
+    background: lightblue;
+    margin-top: 40px;
+    display: flex;
+    justify-content: space-evenly;
+}
+
+.box {
+    height: 100%;
+    width: 25%;
+    text-align: left;
+    
+}
+
+.box-info {
+    height: 30%;
+    line-height: 30px;
+    padding-left: 40px;
+    padding-top: 40px;
+    padding-right: 40px;
+    display: flex;
+    justify-content: space-between;
+}
+
+.vertical-line {
+    width: 0; 
+    height: 150%;
+    border: 1px inset;
+    margin-left: 60px;
+}
+
+.title {
+    color: hsl(0, 0%, 59%);
+    text-align: left;
+}
+
+.bold-text {
+    font-size: 1.5vw;
+    font-weight: 500;
+}
+
