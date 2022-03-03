@@ -15,5 +15,8 @@
   "bugs": {
     "url": "https://github.com/Farhan212-web/IPTrackerApp/issues"
   },
-  "homepage": "https://github.com/Farhan212-web/IPTrackerApp#readme"
+  "homepage": "https://github.com/Farhan212-web/IPTrackerApp#readme",
+  "dependencies": {
+    "leaflet": "^1.7.1"
+  }
 }
