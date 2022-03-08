@@ -6,10 +6,33 @@ const loc = document.querySelector('.location');
 const zone = document.querySelector('.zone');
 const ISP = document.querySelector('.ISP');
 
+const map = L.map('map').setView([0, 0], 5);
+
+L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+    attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+}).addTo(map);
+
+L.marker([0, 0]).addTo(map)
+    .bindPopup('A pretty CSS3 popup.<br> Easily customizable.')
+    .openPopup();
+
 const getIPData = async(value) => {
     
     try {
         const response = await fetch(`https://geo.ipify.org/api/v2/country?apiKey=at_4EXMvOeC6uOgaEdvjjMf1IhzS316s&ipAddress=${value}`);
+        if(response.ok) {
+            const result = await response.json();
+            return result;
+        }
+
+    } catch(err) {
+        console.log("ERROR HAPPENED", err);
+    }
+}
+
+const getCoordinates = async(value) => {
+    try {
+        const response = await fetch(`https://geocode.search.hereapi.com/v1/geocode?apiKey=XNeg3AZApytiueZf9WELqLeJ82vhMuk6m9BQqrTDr1g&q=${value}`);
         if(response.ok) {
             const result = await response.json();
             return result;
@@ -31,16 +54,13 @@ form.addEventListener('submit', (event) => {
         ISP.textContent = data['isp'];
         loc.textContent = data['location']['region'];
         zone.textContent = data['location']['timezone'];
+
+        const mapCoordinates = getCoordinates(loc.textContent);
+        mapCoordinates.then((vals) => {
+            map.setView([vals['items'][0]['position']['lat'], vals['items'][0]['position']['lng']], 13);
+        });
     });
+
+    input.value = '';
 });
-
-const map = L.map('map').setView([51.505, -0.09], 13);
-
-L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-    attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
-}).addTo(map);
-
-L.marker([51.5, -0.09]).addTo(map)
-    .bindPopup('A pretty CSS3 popup.<br> Easily customizable.')
-    .openPopup();
 
