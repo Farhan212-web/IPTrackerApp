@@ -16,6 +16,13 @@ L.marker([0, 0]).addTo(map)
     .bindPopup('A pretty CSS3 popup.<br> Easily customizable.')
     .openPopup();
 
+function checkIfValidIP(str) {
+    // Regular expression to check if string is a IP address
+    const regexExp = /^(([0-9]|[1-9][0-9]|1[0-9]{2}|2[0-4][0-9]|25[0-5])\.){3}([0-9]|[1-9][0-9]|1[0-9]{2}|2[0-4][0-9]|25[0-5])$/gi;
+    
+    return regexExp.test(str);
+}
+
 const getIPData = async(value) => {
     
     try {
@@ -46,20 +53,26 @@ const getCoordinates = async(value) => {
 
 form.addEventListener('submit', (event) => {
     event.preventDefault(); // prevent default behaviour then call necessary functions
-    const IPData = getIPData(input.value);
 
-    IPData.then((data) => {
-        console.log(data);
-        IPAddress.textContent = data['ip'];
-        ISP.textContent = data['isp'];
-        loc.textContent = data['location']['region'];
-        zone.textContent = data['location']['timezone'];
+    if(checkIfValidIP(input.value)) {
+        const IPData = getIPData(input.value);
 
-        const mapCoordinates = getCoordinates(loc.textContent);
-        mapCoordinates.then((vals) => {
-            map.setView([vals['items'][0]['position']['lat'], vals['items'][0]['position']['lng']], 13);
+        IPData.then((data) => {
+            console.log(data);
+            IPAddress.textContent = data['ip'];
+            ISP.textContent = data['isp'];
+            loc.textContent = data['location']['region'];
+            zone.textContent = data['location']['timezone'];
+    
+            const mapCoordinates = getCoordinates(loc.textContent);
+            mapCoordinates.then((vals) => {
+                map.setView([vals['items'][0]['position']['lat'], vals['items'][0]['position']['lng']], 13);
+            });
         });
-    });
+    } else {
+        alert("Invald IP")
+    }
+   
 
     input.value = '';
 });
